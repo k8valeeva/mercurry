@@ -1,0 +1,13 @@
+.login-card{
+    margin: 0 auto;
+    background: #f6f7fa;
+    box-shadow: 3px 3px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.top-header{
+    background: #0e1a35;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 35px 0 0 40px;
+}
