@@ -7,12 +7,15 @@ const UserRoute = ({component: Component, ...rest}) => {
             let username = JSON.parse(localStorage.getItem("username")),
                 pass = JSON.parse(localStorage.getItem("password"));
 
-            if (!(username === null) && !(pass === null)) {
+            if (!(username === null) &&
+                !(pass === null)) {
+
                 return <Component/>
             } else {
-                return   <Redirect to="/login" />
-            }
-        }}/>)
+
+                return <Redirect to="/login" />
+            }}}/>
+    )
 };
 
 export default UserRoute;

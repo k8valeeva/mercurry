@@ -1,5 +1,6 @@
 import React from 'react';
 import  { Form, Button } from  'semantic-ui-react';
+import PropTypes from 'prop-types';
 
 class LoginForm extends React.Component {
     state = {
@@ -16,7 +17,14 @@ class LoginForm extends React.Component {
             data: {...this.state.data, [e.target.name]: e.target.value }
         });
 
-    onSubmit = (e) =>{
+    onSubmit = (e) => {
+        const errors = this.validate(this.state.data);
+        this.setState({errors});
+
+        if (Object.keys(errors).length === 0){
+            this.props.submit(this.state.data);
+        }
+
         e.preventDefault();
         const { history } = this.props;
         let username = JSON.parse(localStorage.getItem("username")),
@@ -27,20 +35,24 @@ class LoginForm extends React.Component {
                 username: '',
                 password: '',
             });
+
             history.push('/');
         } else if (!(username === this.state.username)) {}
+    };
 
-        else {
-            alert('information is not correct')
-        }
+    validate = data => {
+        const errors = {};
+        if (!data.username) errors.username = "Can\'t be blank";
+        if (!data.password) errors.password = "Can\'t be blank";
+        return errors;
     };
 
     render() {
-        const { data } = this.state;
+        const { data, errors } = this.state;
 
         return(
             <Form onSubmit={this.onSubmit}>
-                <Form.Field>
+                <Form.Field error={!!errors.username}>
                     <input
                     type="text"
                     id="username"
@@ -49,9 +61,10 @@ class LoginForm extends React.Component {
                     value={data.username}
                     onChange={this.onChange}
                     />
+                    {errors.username && alert('Can\'t be blank')}
                 </Form.Field>
 
-                <Form.Field>
+                <Form.Field error={!!errors.password}>
                     <input
                         type="password"
                         id="password"
@@ -61,10 +74,15 @@ class LoginForm extends React.Component {
                         onChange={this.onChange}
                     />
                 </Form.Field>
+
                 <Button className="btn-enter">Enter</Button>
             </Form>
         );
     }
 }
+
+LoginForm.propTypes = {
+    submit: PropTypes.func.isRequired
+};
 
 export default LoginForm;
