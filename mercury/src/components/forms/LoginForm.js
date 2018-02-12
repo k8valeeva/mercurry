@@ -28,9 +28,9 @@ class LoginForm extends React.Component {
         e.preventDefault();
         const { history } = this.props;
         let username = JSON.parse(localStorage.getItem("username")),
-            pass = JSON.parse(localStorage.getItem("password"));
+            password = JSON.parse(localStorage.getItem("password"));
 
-        if (username === this.state.username && pass === this.state.password) {
+        if (username === this.state.username && password === this.state.password) {
             this.setState ({
                 username: '',
                 password: '',

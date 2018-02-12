@@ -3,10 +3,10 @@ import { Route, Redirect } from 'react-router-dom';
 
 const UserRoute = ({component: Component, ...rest}) => {
     let username = JSON.parse(localStorage.getItem("username")),
-        pass = JSON.parse(localStorage.getItem("password"));
+        password = JSON.parse(localStorage.getItem("password"));
 
     if (!(username === null) &&
-        !(pass === null)) {
+        !(password === null)) {
         return (
             <Route {...rest} render={()=> {return <Component/>}}/>
         )
